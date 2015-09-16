@@ -30,33 +30,54 @@ class AWP_Cats extends WP_Widget
 
 	function form ($instance) // РОЗРИВ коду
 	{
-		$eventType ='';
-		extract($instance);
-		//print_r($instance);
-		$title = !empty($title) ? esc_attr( $title ) : '' ;
-		$eventType = !empty($eventType) ? $eventType : 'hover';
+		$title		= '';
+		$eventType 	= '';
+		$hoverDelay = '';
+		$speed 		= '';
+		
+		$title 		= !empty($title) ? esc_attr( $title ) : '' ;
+		$eventType  = !empty($eventType)  ? $eventType : 'click';
+		$hoverDelay = !empty($hoverDelay) ? $hoverDelay : 100;
+		$speed 		= !empty($speed) ? $speed : 50;
+	
 		print_r($eventType);
 		?>
 			<p>
 				<label for="<?php echo $this->get_field_id('title'); ?>">Заголовок:</label>
-				<input type="text" 	name ="<?php echo $this->get_field_name('name'); ?>" 
+				<input type="text" 	name ="<?php echo $this->get_field_name('title'); ?>" 
 									id   ="<?php echo $this->get_field_id('title'); ?>" 
 									value="<?php echo $title; ?>" 
 									class="widefat"></input>
 			</p>
 
-			<!-- showdown type selection option -->
+			<!-- eventType -->
 			<p>
 				<label for="<?php echo $this->get_field_id('eventType'); ?>">Opening method</label>
 				<select name ="<?php echo $this->get_field_name('eventType'); ?>" 
 						id   ="<?php echo $this->get_field_id('eventType'); ?>" 
 						class="widefat">
 
-				<option value="click">On Click</option>
-				<option value="hover">On Hover</option>
-				</select> 
-				
-				
+				<option value="click" <?php selected( 'click', $eventType,true ) ?> >On Click</option>
+				<option value="hover" <?php selected( 'hover', $eventType,true ) ?>>On Hover</option>
+				</select> 			
+			</p>
+
+			<!-- hoverDelay -->
+			<p>
+				<label for="<?php echo $this->get_field_id('hoverDelay'); ?>">Hover Delay:</label>
+				<input type="text" 	name ="<?php echo $this->get_field_name('hoverDelay'); ?>" 
+									id   ="<?php echo $this->get_field_id('hoverDelay'); ?>" 
+									value="<?php echo $hoverDelay; ?>" 
+									class="widefat"></input>			
+			</p>
+
+			<!-- speed -->
+			<p>
+				<label for="<?php echo $this->get_field_id('speed'); ?>">Speed:</label>
+				<input type="text" 	name ="<?php echo $this->get_field_name('speed'); ?>" 
+									id   ="<?php echo $this->get_field_id('speed'); ?>" 
+									value="<?php echo $speed; ?>" 
+									class="widefat"></input>			
 			</p>
 		<?php
 	}
