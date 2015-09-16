@@ -133,6 +133,11 @@ class AWP_Cats extends WP_Widget
 		echo $html;                       
 	}
 
+	function update ($new_instance , $old_instance)
+	{
+		$new_instance['title'] = !empty($new_instance['title']) ? strip_tags($new_instance['title']) : 
+	}
+
 	function awp_styles_scripts ()
     {
         wp_register_script('awp-cookie', plugins_url('js/jquery.cookie.js',__FILE__),array('jquery'));
