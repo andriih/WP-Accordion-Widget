@@ -34,11 +34,16 @@ class AWP_Cats extends WP_Widget
 		$eventType 	= '';
 		$hoverDelay = '';
 		$speed 		= '';
-		
+		$exclude ='';
+
+		extract($instance);
+
 		$title 		= !empty($title) ? esc_attr( $title ) : '' ;
 		$eventType  = !empty($eventType)  ? $eventType : 'click';
 		$hoverDelay = !empty($hoverDelay) ? $hoverDelay : 100;
 		$speed 		= !empty($speed) ? $speed : 50;
+		$exclude	= !empty($exclude) ? $exclude : '';
+
 	
 		print_r($eventType);
 		?>
@@ -79,6 +84,15 @@ class AWP_Cats extends WP_Widget
 									value="<?php echo $speed; ?>" 
 									class="widefat"></input>			
 			</p>
+
+			<!-- exclude -->
+			<p>
+				<label for="<?php echo $this->get_field_id('exclude'); ?>">Exclude Category (ID):</label>
+				<input type="text" 	name ="<?php echo $this->get_field_name('exclude'); ?>" 
+									id   ="<?php echo $this->get_field_id('exclude'); ?>" 
+									value="<?php echo $exclude; ?>" 
+									class="widefat"></input>			
+			</p>
 		<?php
 	}
 
@@ -93,8 +107,8 @@ class AWP_Cats extends WP_Widget
 		$cats = wp_list_categories(
 			array(
 				'title_li' => '',
-				'echo' => false
-				//'exclude' => $exclude;
+				'echo' => false ,
+				'exclude' => $exclude,
 			)
 		);
 		$str = preg_replace('#title="[^"]+#','',$cats);
