@@ -135,7 +135,10 @@ class AWP_Cats extends WP_Widget
 
 	function update ($new_instance , $old_instance)
 	{
-		$new_instance['title'] = !empty($new_instance['title']) ? strip_tags($new_instance['title']) : 
+		$new_instance['title'] = !empty($new_instance['title']) ? 
+								 strip_tags($new_instance['title']) : '';
+		
+
 	}
 
 	function awp_styles_scripts ()
