@@ -1,0 +1,12 @@
+ul.accordion, 
+.accordion ul{
+	list-style: none;
+}
+
+ul.accordion ul{
+	margin_left: 0.8571;
+}
+
+.widget h3.widget-title{
+	margin-bottom: .1em ;
+}

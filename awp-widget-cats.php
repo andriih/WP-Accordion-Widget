@@ -135,10 +135,18 @@ class AWP_Cats extends WP_Widget
 
 	function update ($new_instance , $old_instance)
 	{
-		$new_instance['title'] = !empty($new_instance['title']) ? 
-								 strip_tags($new_instance['title']) : '';
+		$new_instance['title'] 		= !empty($new_instance['title']) ? strip_tags($new_instance['title']) : '';
 		
+		$new_instance['eventType']  = ($new_instance['eventType'] === 'click')  ? 'click' : 'hover';
 
+		$new_instance['hoverDelay'] = ((int)($new_instance['hoverDelay'])) ? $new_instance['hoverDelay'] : 100;
+
+		$new_instance['speed']      = ((int)($new_instance['speed'])) ? $new_instance['speed'] : 400;
+
+		$new_instance['exclude']    = !empty($new_instance['exclude']) ? $new_instance['exclude'] : '';
+
+		return $new_instance;
+		
 	}
 
 	function awp_styles_scripts ()
@@ -147,9 +155,11 @@ class AWP_Cats extends WP_Widget
         wp_register_script('awp-hoverIntent', plugins_url('js/jquery.hoverIntent.minified.js',__FILE__),array('awp-cookie'));
         wp_register_script('awp-dcjqaccordion', plugins_url('js/jquery.dcjqaccordion.2.9.js',__FILE__),array('awp-hoverIntent'));
         wp_register_script('awp-scripts', plugins_url('js/awp-scripts.js',__FILE__),array('awp-dcjqaccordion'));
-
+        wp_register_style( 'awp-style', plugins_url( 'css/awp-style.css', __FILE__) );
+        
         wp_enqueue_script(  'awp-scripts') ;
-        wp_localize_script( 'awp-scripts', 'obj',  $this->awp_cats_array) ;               	
+        wp_localize_script( 'awp-scripts', 'obj',  $this->awp_cats_array) ;
+        wp_enqueue_style(  'awp-style');
     }
 }
 
